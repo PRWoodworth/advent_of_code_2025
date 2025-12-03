@@ -28,10 +28,11 @@ public class Day1 {
                         current -= amount;
                         break;
                 }
+
                 if(current < 0){
-                    current += 100;
+                    current += 1000;
                 }
-                
+
                 current = current % 100;
 
                 if(current == 0){
@@ -47,6 +48,20 @@ public class Day1 {
     }
 
     private void part_2(){
-
+        int current = start;
+        int total_pass_zero = 0;
+        try (BufferedReader br = new BufferedReader(new FileReader("day_1/day1_input.txt"))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                int direction = line.charAt(0) == 'R' ? 1 : -1;
+                int amount = Integer.parseInt(line.substring(1));
+                
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        System.out.println("Part 2: " + total_pass_zero);
     }
 }
