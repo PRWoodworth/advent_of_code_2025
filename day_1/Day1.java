@@ -20,24 +20,9 @@ public class Day1 {
             while ((line = br.readLine()) != null) {
                 int direction = line.charAt(0) == 'R' ? 1 : -1;
                 int amount = Integer.parseInt(line.substring(1));
-                switch (direction) {
-                    case 1:
-                        current += amount;
-                        break;
-                    case -1:
-                        current -= amount;
-                        break;
-                }
-
-                if(current < 0){
-                    current += 1000;
-                }
-
-                current = current % 100;
-
-                if(current == 0){
-                    total_zero++;
-                }
+                int remainder = (current + (direction * amount)) % 100;
+                current = (remainder < 0) ? remainder + 100 : remainder;
+                total_zero += (current == 0) ? 1 : 0;
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -55,7 +40,22 @@ public class Day1 {
             while ((line = br.readLine()) != null) {
                 int direction = line.charAt(0) == 'R' ? 1 : -1;
                 int amount = Integer.parseInt(line.substring(1));
-                
+                int vel = direction * amount;
+                int next = current + vel;
+                int passes = 0;
+                if(next > 0){
+                    passes = next / 100;
+                } else if(next == 0){
+                    passes = 1;
+                } else if(next < 0){
+                    passes = (-next + 100) / 100;
+                    if(current == 0){
+                        passes -= 1;
+                    }
+                }
+                total_pass_zero += passes;
+                int remainder = (current + (direction * amount)) % 100;
+                current = (remainder < 0) ? remainder + 100 : remainder;
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
